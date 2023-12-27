@@ -8,9 +8,13 @@
 </head>
 <body>
 
-    <a href="login"><h2>Login</h2></a>
+    <a href="registro"><h2>Registrarse</h2></a>
+
+    <a href="/login"><h2>Login</h2></a>
 
     <a href="dashboard"><h2>dashboard</h2></a>
+
+    <a href="test"><h3>pantallas de prueba</h3></a>
 
 </body>
 </html>

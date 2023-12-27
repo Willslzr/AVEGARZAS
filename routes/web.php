@@ -1,7 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +21,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/dashboard', [UserController::class, 'index']);
+
+Route::get('/test', [TestController::class, 'test'])->name('test');
+
+Route::view('login', 'login');
+
+Route::post('/post-login', [LoginController::class, 'login']);
+
+// Route::post('', [LoginController::class, 'postLogin'])->name('postLogin');
+
+// Route::post('/login', [LoginController::class, 'login']);
