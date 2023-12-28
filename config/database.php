@@ -63,6 +63,7 @@ return [
             ]) : [],
         ],
 
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
@@ -74,9 +75,11 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
-            'search_path' => 'public',
+            'search_path' => 'sch_sica',
             'sslmode' => 'prefer',
         ],
+
+
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',
