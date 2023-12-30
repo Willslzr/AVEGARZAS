@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('habitantes', function (Blueprint $table) {
+        Schema::create('titulares', function (Blueprint $table) {
             $table->id();
-            $table->integer('titular_id');
+            $table->integer('usuario_id');
             $table->string('nombre');
-            $table->integer('cedula');
-            $table->smallInteger('casa');
             $table->smallInteger('manzana');
+            $table->smallInteger('casa');
+            $table->integer('telefono');
+            $table->integer('cedula');
             $table->date('fecha_de_nacimiento');
-            $table->string('relacion');
+            $table->decimal('saldo_positivo',8,2);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('habitantes');
+        Schema::dropIfExists('titulares');
     }
 };

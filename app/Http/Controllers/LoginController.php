@@ -3,19 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
+
+    public function index(){
+
+        return view('login');
+
+    }
+
+
     public function login(request $request){
 
         $email = $request->input('email');
         $password = $request->input('password');
 
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|min:8',
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8'],
         ]);
 
         $validator->setCustomMessages([
@@ -29,24 +38,30 @@ class LoginController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
+        $remember = $request->filled('remember');
+
             // Implementar la lógica de autenticación:
-    if (Auth::attempt(['email' => $email, 'password' => $password])) {
+    if (Auth::attempt(['email' => $email, 'password' => $password], $remember)) {
+        request()->session()->regenerate();
         // Inicio de sesión exitoso:
         // Redirige a la página principal o al dashboard.
-        return redirect()->intended('/dashboard');
+        return redirect()->intended('/inicio');
     } else {
         // Inicio de sesión fallido:
         // Devuelve un mensaje de error.
-        return redirect()->back()->with('error', 'Credenciales incorrectas');
+        return redirect()->back()->withErrors('Credenciales incorrectas');
     }
 
     }
 
-    public function postLogin(Request $request){
-        $token = $request->session()->token();
-        $token = csrf_token();
-        $email = $request->input('email');
-        dd($token, $email);
-        $this->validate($request)[""] = "";
+    public function logout(Request $request, Redirector $redirect){
+
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return $redirect->to('login');
     }
 }

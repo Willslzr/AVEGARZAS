@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-            <a class="nav-link text-white active bg-gradient-primary" href="/dashboard">
+            <a class="nav-link text-white active bg-gradient-primary" href="/inicio">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="material-icons opacity-10">bar_chart</i>
                 </div>
@@ -70,12 +70,15 @@
             </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-white " href="#">
+            <form action="{{route('logout')}}" method="POST">
+            @csrf
+            <a class="nav-link text-white" onclick="this.closest('form').submit()" href="#">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">login</i>
                 </div>
                 <span class="nav-link-text ms-1">Cerrar Sesion</span>
             </a>
+            </form>
             </li>
             <li class="nav-item">
             <a class="nav-link text-white " href="#">

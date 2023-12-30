@@ -13,21 +13,13 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nombres');
-            $table->string('apellidos');
-            $table->integer('cedula');
+            $table->string('name');
             $table->string('email')->unique();
-            $table->integer('telefono');
-            $table->smallInteger('manzana');
-            $table->smallInteger('casa');
-            $table->timestamp('verificado')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
-            $table->softDeletes();
-            $table->date('fecha_de_nacimiento');
-            $table->decimal('saldo_positivo', 10, 2);
         });
     }
 
