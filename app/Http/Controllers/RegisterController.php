@@ -44,7 +44,7 @@ class RegisterController extends Controller
             'mes.required' => 'El campo "mes" es requerido',
             'anno.required' => 'El campo "año" es requerido',
             'dia' => 'Dia inválido',
-            'mes' => 'Mes inválido',
+            'mes' => 'Mes debe ser un numero entre 1 y 12',
             'anno' => 'Año inválido',
             'cedula.required' => 'El campo "cedula" es requerido',
             'cedula' => 'Numero de cedula invalido',

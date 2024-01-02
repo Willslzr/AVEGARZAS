@@ -14,7 +14,7 @@
             <ul class="navbar-nav  justify-content-end">
                 {{-- Boton para imprimir reportes --}}
                 <li class="nav-item d-flex align-items-center">
-                <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="#">Reporte General</a>
+                <a class="btn btn-outline-danger btn-sm mb-0 me-3" target="_blank" href="#">Reporte General</a>
                 </li>
 
                 {{-- Barra para ocultar el menu en dispositivos grandes --}}

@@ -30,6 +30,11 @@
                 <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto border box-shadow">
                 <div class="card card-plain">
                     <div class="card-header">
+                        @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                        @endif
                     <h4 class="font-weight-bolder">Iniciar Sesion</h4>
                     <p class="mb-0">Ingresa tus datos y contraseña</p>
                     </div>

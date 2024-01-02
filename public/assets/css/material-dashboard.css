@@ -2475,14 +2475,14 @@ progress {
 .table {
   --bs-table-color: #7b809a;
   --bs-table-bg: transparent;
-  --bs-table-border-color: #f0f2f5;
+  --bs-table-border-color: #c2c2c2;
   --bs-table-accent-bg: transparent;
-  --bs-table-striped-color: #7b809a;
-  --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+  --bs-table-striped-color: #7b7b80;
+  --bs-table-striped-bg: rgba(0, 0, 0, 0.14);
   --bs-table-active-color: #7b809a;
   --bs-table-active-bg: rgba(0, 0, 0, 0.1);
   --bs-table-hover-color: #7b809a;
-  --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+  --bs-table-hover-bg: rgba(0, 0, 0, 0.12);
   width: 100%;
   margin-bottom: 1rem;
   color: var(--bs-table-color);
@@ -25825,10 +25825,6 @@ body:not(.dark-version) .sidenav.bg-transparent .collapse .nav-item .nav-link.ac
 .table.align-items-center td,
 .table.align-items-center th {
   vertical-align: middle;
-}
-
-.table tbody tr:last-child td {
-  border-width: 0;
 }
 
 .table> :not(:last-child)> :last-child>* {

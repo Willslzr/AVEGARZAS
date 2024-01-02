@@ -5,7 +5,7 @@
         @include('Backend.Layouts.common-head')
     </head>
 
-    <body class="g-sidenav-show  bg-gray-300">
+    <body class="g-sidenav-show  bg-gray-400">
 
     @include('Backend.Layouts.sidebar')
 
