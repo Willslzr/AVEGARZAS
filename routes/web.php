@@ -6,7 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
-
+use App\Http\Controllers\TitularesController;
+use App\Http\Controllers\ConfiguracionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,11 @@ Route::post('/register', [RegisterController::class, 'store'])->name('register.s
 Route::get('/inicio', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 Route::get('/test', [TestController::class, 'test'])->name('test');
+
+Route::get('/titulares', [TitularesController::class, 'index'])->middleware('auth')->name('titulares');
+
+Route::get('/configuracion', [ConfiguracionController::class, 'main'])->middleware('auth')->name('configuracion');
+Route::post('/configuracion', [ConfiguracionController::class, 'store'])->name('config.store');
 
 
 

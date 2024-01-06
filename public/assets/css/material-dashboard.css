@@ -5635,8 +5635,8 @@ fieldset:disabled .btn {
   --bs-pagination-focus-bg: #f0f2f5;
   --bs-pagination-focus-box-shadow: 0 0 0 0.2rem rgba(233, 30, 99, 0.25);
   --bs-pagination-active-color: #fff;
-  --bs-pagination-active-bg: #e91e63;
-  --bs-pagination-active-border-color: #e91e63;
+  --bs-pagination-active-bg: rgba(26, 115, 232, 0.23);
+  --bs-pagination-active-border-color: rgba(26, 115, 232, 0.23);
   --bs-pagination-disabled-color: #6c757d;
   --bs-pagination-disabled-bg: #fff;
   --bs-pagination-disabled-border-color: #dee2e6;
@@ -22756,6 +22756,10 @@ label,
   background-image: linear-gradient(195deg, #49a3f1 0%, #1A73E8 100%);
 }
 
+.bg-opacity-info {
+    opacity: 0.9;
+}
+
 .bg-gradient-warning {
   background-image: linear-gradient(195deg, #FFA726 0%, #FB8C00 100%);
 }
@@ -27928,5 +27932,7 @@ pre[class*="language-"] {
     overflow: auto !important;
   }
 }
+
+
 
 /*# sourceMappingURL=dashboard-free.css.map */
