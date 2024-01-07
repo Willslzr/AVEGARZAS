@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('habitantes', function (Blueprint $table) {
             $table->id();
             $table->integer('titular_id');
-            $table->string('nombre');
+            $table->string('nombres');
+            $table->string('apellidos');
             $table->integer('cedula');
             $table->smallInteger('casa');
             $table->smallInteger('manzana');

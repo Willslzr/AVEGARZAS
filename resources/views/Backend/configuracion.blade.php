@@ -28,11 +28,11 @@
                         </div>
                         <div class="col-sm-4 my-2">
                             <label for="preciodolar" class="form-label font-weight-bold fs-6">Precio Actual</label>
-                            <input type="text" class="form-control form-control-lg" placeholder="{{ $precios['precio_dolar'] }}" style="font-size: 2rem;" readonly>
+                            <input type="text" class="form-control form-control-lg p-0" placeholder="Bs {{ $precios['precio_dolar'] ?? 0 }}" style="font-size: 2rem;" readonly>
                         </div>
                         <div class="col-sm-4 my-2">
                             <label for="preciodolar" class="font-weight-bold fs-6">Precio Mensualidad Actual</label>
-                            <input type="text" class="form-control form-control-lg" placeholder="{{ $precios['precio_mensualidad'] }}" style="font-size: 2rem;" readonly>
+                            <input type="text" class="form-control form-control-lg p-0" placeholder="$ {{ $precios['precio_mensualidad'] ?? 0 }}" style="font-size: 2rem;" readonly>
                         </div>
                         <div class="col-md-2 my-2">
                         </div>

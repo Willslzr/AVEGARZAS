@@ -43,4 +43,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function titular(){
+
+    return $this->hasOne(Titulares::class, 'usuario_id');
+    }
 }

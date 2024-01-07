@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Titulares;
 
 use App\Models\Titulares;
 use Livewire\Component;
@@ -41,13 +41,13 @@ class indice extends Component
 
     public function render()
     {
-        $usuarios = Titulares::query()
-            ->where('nombre', 'like', '%'.$this->search.'%')
-            ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate($this->perPage);
 
         return view('livewire.titulares.indice', [
-            'usuarios' => $usuarios
+            'usuarios' => Titulares::query()
+            ->where('nombres', 'like', '%'.strtoupper($this->search).'%')
+            ->orWhere('apellidos', 'like', '%'.strtoupper($this->search).'%')
+            ->orderBy($this->sortField, $this->sortDirection)
+            ->paginate($this->perPage)
         ]);
     }
 }

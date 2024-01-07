@@ -10,7 +10,8 @@ class Titulares extends Model
     use HasFactory;
     protected $fillable = [
         'usuario_id',
-        'nombre',
+        'nombres',
+        'apellidos',
         'manzana',
         'casa',
         'telefono',
@@ -18,4 +19,8 @@ class Titulares extends Model
         'fecha_de_nacimiento',
         'saldo_positivo'
     ];
+    public function user(){
+
+        return $this->belongsTo(User::class, 'id');
+    }
 }

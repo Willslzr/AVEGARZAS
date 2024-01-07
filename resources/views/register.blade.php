@@ -54,9 +54,13 @@
                         <input name="password_confirmation" type="password" class="form-control">
                         </div>
                         <div class="input-group input-group-outline mb-3">
-                        <label class="form-label">Nombre completo</label>
-                        <input name="name" type="text" value="{{old('name')}}" class="form-control">
+                        <label class="form-label">Nombres</label>
+                        <input name="nombres" type="text" value="{{old('nombres')}}" class="form-control">
                         </div>
+                        <div class="input-group input-group-outline mb-3">
+                            <label class="form-label">Apellidos</label>
+                            <input name="apellidos" type="text" value="{{old('apellidos')}}" class="form-control">
+                            </div>
                         <p class="mb-1" style="margin-left: 5px;">Fecha de nacimiento</p>
                         <div class="d-flex">
                             <div class="col-md-3 flex-grow-1">

@@ -8,15 +8,50 @@
             <select wire:model="perPage" wire:change="updatePage" class="align-self-stretch h-100">
                 <option value="5">5</option>
                 <option value="10">10</option>
-                <option value="50">50</option>
+                <option value="20">20</option>
             </select>
         </div>
+        <div class="" wire:loading>
+            <span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
+        </div>
     </div>
+
 <x-table>
     <x-slot name="thead">
         <tr>
-        <th wire:click="sortBy('nombre')">Nombre</th>
-        <th wire:click="sortBy('manzana')">Manzana</th>
+        <th wire:click="sortBy('nombres')">Nombres
+            <span class="sort-arrow">
+                @if ($sortField === 'nombres')
+                    @if ($sortDirection === 'asc')
+                        <i class="fas fa-sort-up"></i>
+                    @else
+                        <i class="fas fa-sort-down"></i>
+                    @endif
+                @endif
+            </span>
+        </th>
+        <th wire:click="sortBy('apellidos')">Apellidos
+            <span class="sort-arrow">
+                @if ($sortField === 'apellidos')
+                    @if ($sortDirection === 'asc')
+                        <i class="fas fa-sort-up"></i>
+                    @else
+                        <i class="fas fa-sort-down"></i>
+                    @endif
+                @endif
+            </span>
+        </th>
+        <th wire:click="sortBy('manzana')">Manzana
+            <span class="sort-arrow">
+                @if ($sortField === 'manzana')
+                    @if ($sortDirection === 'asc')
+                        <i class="fas fa-sort-up"></i>
+                    @else
+                        <i class="fas fa-sort-down"></i>
+                    @endif
+                @endif
+            </span>
+        </th>
         <th>Casa</th>
         <th>Meses Vencidos</th>
         <th>Telefono</th>
@@ -24,10 +59,18 @@
         </tr>
     </x-slot>
     <x-slot name="tbody">
+        @if ($usuarios->isEmpty())
+            <tr>
+                <td colspan="7" class="text-center py-4">No hay registros</td>
+            </tr>
+        @else
         @foreach ($usuarios as $usuario)
             <tr>
             <td>
-                <h6 class="mb-0 text-sm">{{ $usuario->nombre }}</h6>
+                <h6 class="mb-0 text-sm">{{ $usuario->nombres }}</h6>
+            </td>
+            <td>
+                <h6 class="mb-0 text-sm">{{ $usuario->apellidos }}</h6>
             </td>
             <td>
                 <h6 class="mb-0 text-sm">{{ $usuario->manzana }}</h6>
@@ -48,7 +91,7 @@
             </td>
             @endif --}}
             <td>
-                <h6 class="mb-0 text-sm">{{ $usuario->telefono }}</h6>
+                <h6 class="mb-0 text-sm">0{{ substr($usuario->telefono, 0, 3) . '-' . substr($usuario->telefono, 3) }}</h6>
             </td>
             <td>
                 <div class="btn-group">
@@ -62,6 +105,7 @@
             </td>
             </tr>
         @endforeach
+        @endif
     </x-slot>
 </x-table>
 

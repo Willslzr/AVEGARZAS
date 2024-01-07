@@ -8,6 +8,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TitularesController;
 use App\Http\Controllers\ConfiguracionController;
+use App\Http\Controllers\MensualidadesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,8 @@ Route::get('/titulares', [TitularesController::class, 'index'])->middleware('aut
 
 Route::get('/configuracion', [ConfiguracionController::class, 'main'])->middleware('auth')->name('configuracion');
 Route::post('/configuracion', [ConfiguracionController::class, 'store'])->name('config.store');
+
+Route::get('/Mensualidades' , [MensualidadesController::class,'index'])->middleware('auth')->name('mensualidades');
 
 
 

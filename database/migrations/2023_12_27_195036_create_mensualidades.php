@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('monto', 10,2);
             $table->binary('imagen')->nullable();
             $table->string('estado');
+            $table->integer('numero_de_refencia');
             $table->timestamps();
             $table->integer('id_admin_aprob')->nullable();
         });

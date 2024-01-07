@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('titulares', function (Blueprint $table) {
             $table->id();
             $table->integer('usuario_id');
-            $table->string('nombre');
+            $table->string('nombres');
+            $table->string('apellidos');
             $table->smallInteger('manzana');
             $table->smallInteger('casa');
-            $table->integer('telefono');
+            $table->bigInteger('telefono');
             $table->integer('cedula');
             $table->date('fecha_de_nacimiento');
             $table->decimal('saldo_positivo',8,2);
