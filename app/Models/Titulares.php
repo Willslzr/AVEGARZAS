@@ -12,6 +12,7 @@ class Titulares extends Model
         'usuario_id',
         'nombres',
         'apellidos',
+        'email',
         'manzana',
         'casa',
         'telefono',

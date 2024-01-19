@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('titulares', function (Blueprint $table) {
             $table->id();
-            $table->integer('usuario_id');
+            $table->integer('usuario_id')->nullable();
             $table->string('nombres');
             $table->string('apellidos');
+            $table->string('email')->nullable();
             $table->smallInteger('manzana');
             $table->smallInteger('casa');
-            $table->bigInteger('telefono');
-            $table->integer('cedula');
-            $table->date('fecha_de_nacimiento');
+            $table->bigInteger('telefono')->nullable();
+            $table->integer('cedula')->nullable();
+            $table->date('fecha_de_nacimiento')->nullable();
             $table->decimal('saldo_positivo',8,2);
             $table->timestamps();
         });

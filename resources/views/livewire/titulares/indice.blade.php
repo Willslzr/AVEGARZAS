@@ -16,7 +16,7 @@
         </div>
         <div class="ms-auto">
             <div class="">
-                <a href="#" target="_blank" class="btn btn-sm bg-gradient-info mb-0">Nuevo registro</a>
+                <a href="{{route('titulares.create')}}" class="btn btn-sm bg-gradient-info mb-0">Nuevo</a>
             </div>
         </div>
     </div>
@@ -83,19 +83,18 @@
                 <h6 class="mb-0 text-sm">{{ $usuario->casa }}</h6>
             </td>
             <td>
-                <h6 class="mb-0 text-sm">{{$usuario->user->email}}</h6>
+                @if($usuario->telefono != null)
+                <h6 class="mb-0 text-sm">{{$usuario->email}}</h6>
+                @else
+                <h6 class="mb-0 text-sm">N/A</h6>
+                @endif
             </td>
-            {{-- @if($mensualidades)
-            <td class="text-sm">
-                <span class="badge badge-sm bg-gradient-success">Solvente</span>
-            </td>
-            @else
-            <td class="align-middle text-center text-sm">
-                <span class="badge badge-sm bg-gradient-secondary">6 Meses</span>
-            </td>
-            @endif --}}
             <td>
+                @if($usuario->telefono != null)
                 <h6 class="mb-0 text-sm">0{{ substr($usuario->telefono, 0, 3) . '-' . substr($usuario->telefono, 3) }}</h6>
+                @else
+                <h6 class="mb-0 text-sm">N/A</h6>
+                @endif
             </td>
             <td>
                 <div class="btn-group">

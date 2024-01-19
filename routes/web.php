@@ -37,6 +37,8 @@ Route::get('/inicio', [DashboardController::class, 'index'])->middleware('auth')
 Route::get('/test', [TestController::class, 'test'])->name('test');
 
 Route::get('/titulares', [TitularesController::class, 'index'])->middleware('auth')->name('titulares');
+Route::get('/titulares/nuevo', [TitularesController::class, 'create'])->middleware('auth')->name('titulares.create');
+Route::post('titulares/store', [TitularesController::class, 'store'])->name('titulares.store');
 
 Route::get('/configuracion', [ConfiguracionController::class, 'main'])->middleware('auth')->name('configuracion');
 Route::post('/configuracion', [ConfiguracionController::class, 'store'])->name('config.store');

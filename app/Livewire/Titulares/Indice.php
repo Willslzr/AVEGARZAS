@@ -21,6 +21,7 @@ class indice extends Component
 
     public function sortBy($field)
     {
+
         if ($this->sortField === $field) {
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
         } else {
@@ -47,6 +48,7 @@ class indice extends Component
             ->where('nombres', 'like', '%'.strtoupper($this->search).'%')
             ->orWhere('apellidos', 'like', '%'.strtoupper($this->search).'%')
             ->orderBy($this->sortField, $this->sortDirection)
+            ->orderBy('casa', $this->sortDirection)
             ->paginate($this->perPage)
         ]);
     }

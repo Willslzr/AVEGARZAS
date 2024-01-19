@@ -79,6 +79,7 @@ class RegisterController extends Controller
             'usuario_id' => $id,
             'nombres' => strtoupper($request->nombres),
             'apellidos' => strtoupper($request->apellidos),
+            'email' => $request->email,
             'manzana' => $request->manzana,
             'casa' => $request->casa,
             'telefono' => $request->telefono_prefijo.$request->telefono_numero,
