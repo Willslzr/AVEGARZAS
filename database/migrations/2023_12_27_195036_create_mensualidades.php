@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('mensualidades', function (Blueprint $table) {
             $table->id();
             $table->integer('titular_id');
+            $table->date('mes_pagado');
             $table->decimal('monto', 10,2);
-            $table->binary('imagen')->nullable();
+            $table->string('imagen')->nullable();
             $table->string('estado');
-            $table->integer('numero_de_refencia');
+            $table->integer('numero_de_referencia');
             $table->timestamps();
             $table->integer('id_admin_aprob')->nullable();
         });

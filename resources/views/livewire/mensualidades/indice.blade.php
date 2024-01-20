@@ -6,9 +6,9 @@
         </div>
         <div class="">
             <select wire:model="perPage" wire:change="updatePage" class="align-self-stretch h-100">
-                <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
+                <option value="50">50</option>
             </select>
         </div>
         <div class="" wire:loading>
@@ -54,7 +54,7 @@
         </th>
         <th>Casa</th>
         <th>Meses Vencidos</th>
-        <th>Telefono</th>
+        <th>Ultimo Pago</th>
         <th>Acciones</th>
         </tr>
     </x-slot>
@@ -78,21 +78,35 @@
             <td>
                 <h6 class="mb-0 text-sm">{{ $usuario->casa }}</h6>
             </td>
-            <td class="text-sm">
-                <span class="badge badge-sm bg-gradient-success">Solvente</span>
-            </td>
-            {{-- @if($mensualidades)
-            <td class="text-sm">
-                <span class="badge badge-sm bg-gradient-success">Solvente</span>
+
+            @if($usuario->mensualidades()->latest()->first() && $fechaActual)
+            @php
+                $ultimaMensualidad = \Carbon\Carbon::parse($usuario->mensualidades()->latest()->first()->mes_pagado);
+                $diferenciaMeses = $ultimaMensualidad->diffInMonths($fechaActual);
+            @endphp
+            <td>
+                <h6 class="mb-0 text-sm">
+                @if($diferenciaMeses > 1)
+                    <span class="badge badge-sm bg-gradient-secondary">{{ $diferenciaMeses - 1 }} meses</span>
+                @else
+                    <span class="badge badge-sm bg-gradient-success">Solvente</span>
+                @endif
+                </h6>
             </td>
             @else
-            <td class="align-middle text-center text-sm">
-                <span class="badge badge-sm bg-gradient-secondary">6 Meses</span>
-            </td>
-            @endif --}}
+                <td class="align-middle text-center text-sm">
+                    <span class="badge badge-sm bg-gradient-secondary">Sin información</span>
+                </td>
+            @endif
+
             <td>
-                <h6 class="mb-0 text-sm">0{{ substr($usuario->telefono, 0, 3) . '-' . substr($usuario->telefono, 3) }}</h6>
+                @if($usuario->mensualidades()->latest()->first() && $fechaActual)
+                <h6 class="mb-0 text-sm">{{ \Carbon\Carbon::parse($usuario->mensualidades()->latest()->first()->mes_pagado)->format('m/Y') }}</h6>
+                @else
+                <h6 class="mb-0 text-sm">Sin información</h6>
+                @endif
             </td>
+
             <td>
                 <div class="btn-group">
                     <a href="#" class="btn btn-sm btn-info" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Ver información">

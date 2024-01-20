@@ -12,6 +12,7 @@ class mensualidades extends Model
     protected $fillable = [
         'titular_id',
         'monto',
+        'mes_pagado',
         'imagen',
         'numero_de_referencia',
         'estado',

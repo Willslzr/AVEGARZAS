@@ -6,8 +6,8 @@
         </div>
         <div class="">
             <select wire:model="perPage" wire:change="updatePage" class="align-self-stretch h-100">
-                <option value="5">5</option>
                 <option value="10">10</option>
+                <option value="20">20</option>
                 <option value="50">50</option>
             </select>
         </div>

@@ -24,4 +24,9 @@ class Titulares extends Model
 
         return $this->belongsTo(User::class, 'id');
     }
+
+    public function mensualidades(){
+
+        return $this->hasMany(Mensualidades::class, 'titular_id');
+    }
 }

@@ -74,6 +74,17 @@
                                     </x-field>
                                 </div>
                             </div>
+                            <div class="row col-12 justify-content-center big-slot mt-3">
+                                <div class="d-flex justify-content-center">
+                                    <x-field class="col-3 mx-1 text-center">
+                                        <x-label for="MesCancelado" class="mx-0">Ultima mensualidad cancelada *</x-label>
+                                            <div class="d-flex">
+                                            <x-input type="number" name="mescancel" class="w-50 mx-1 text-center" placeholder="mes"/>
+                                            <x-input type="number" name="anocancel" class="mx-1 text-center" placeholder="año"/>
+                                            </div>
+                                    </x-field>
+                                </div>
+                            </div>
                         </x-slot>
 
                         <x-slot name="footer">

@@ -8,7 +8,9 @@ use App\Models\casas;
 use App\Models\Titulares;
 use Nette\Utils\DateTime;
 use Illuminate\Http\Request;
+use App\Models\mensualidades;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class TitularesController extends Controller
@@ -36,6 +38,8 @@ class TitularesController extends Controller
             'telefono_numero' => ['integer','min:0', 'digits:7', 'nullable'],
             'manzana' => ['required', 'integer','min:1','max:22'],
             'casa' => ['required', 'integer','min:0','max:50'],
+            'mescancel' => ['required', 'integer', 'min:1', 'max:12'],
+            'anocancel' => ['required', 'integer']
         ]);
 
         $validator->setCustomMessages([
@@ -52,7 +56,9 @@ class TitularesController extends Controller
             'telefono_numero' => 'Numero de telefono invalido',
             'manzana' => 'Numero de manzana invalido',
             'casa' => 'Numero de casa invalido',
-            'casa.unique' => 'Esa casa ya esta registrada'
+            'casa.unique' => 'Esa casa ya esta registrada',
+            'mescancel' => 'Ultimo mes cancelado invalido',
+            'anocancel' => 'Año del ultimo mes cancelado invalido'
         ]);
 
         if ($validator->fails()) {
@@ -84,7 +90,7 @@ class TitularesController extends Controller
             $telefono = $request->telefono_prefijo.$request->telefono_numero;
         }
 
-        Titulares::create([
+        $titular = Titulares::create([
             'nombres' => strtoupper($request->nombres),
             'apellidos' => strtoupper($request->apellidos),
             'manzana' => $request->manzana,
@@ -94,6 +100,16 @@ class TitularesController extends Controller
             'cedula' => $request->cedula,
             'fecha_de_nacimiento' => $fecha,
             'saldo_positivo' => "0",
+        ]);
+
+        mensualidades::create([
+            'titular_id' => $titular->id,
+            'mes_pagado' => Carbon::create($request->anocancel, $request->mescancel, 1),
+            'monto' => "0",
+            'imagen' => null,
+            'numero_de_referencia' => "100001",
+            'estado' => 'aprobado',
+            'id_admin_aprob' => Auth::id(),
         ]);
 
         return to_route('titulares')->with('status', 'El titular ha sido registrado');

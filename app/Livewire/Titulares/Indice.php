@@ -15,7 +15,7 @@ class indice extends Component
     public $sortField = 'manzana';
     public $sortDirection = 'asc';
     protected $queryString = ['search'];
-    public $perPage = 5;
+    public $perPage = 10;
     protected $paginationTheme = 'bootstrap';
 
 

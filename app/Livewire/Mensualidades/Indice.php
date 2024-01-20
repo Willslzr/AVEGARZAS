@@ -5,6 +5,7 @@ namespace App\Livewire\Mensualidades;
 use Livewire\Component;
 use App\Models\Titulares;
 use Livewire\WithPagination;
+use Illuminate\Support\Carbon;
 
 class Indice extends Component
 {
@@ -14,9 +15,16 @@ class Indice extends Component
     public $sortField = 'manzana';
     public $sortDirection = 'asc';
     protected $queryString = ['search'];
-    public $perPage = 5;
+    public $perPage = 10;
+    public $fechaActual;
+
     protected $paginationTheme = 'bootstrap';
 
+
+    public function mount()
+    {
+        $this->fechaActual = Carbon::now();
+    }
 
     public function sortBy($field)
     {
@@ -39,12 +47,15 @@ class Indice extends Component
     }
     public function render()
     {
+
         return view('livewire.mensualidades.indice', [
             'usuarios' => Titulares::query()
             ->where('nombres', 'like', '%'.strtoupper($this->search).'%')
             ->orWhere('apellidos', 'like', '%'.strtoupper($this->search).'%')
             ->orderBy($this->sortField, $this->sortDirection)
-            ->paginate($this->perPage)
+            ->orderBy('casa', $this->sortDirection)
+            ->paginate($this->perPage),
+            'fechaActual' => $this->fechaActual,
         ]);
     }
 }

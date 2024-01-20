@@ -14,6 +14,8 @@
 
     <a href="/inicio"><h2>dashboard</h2></a>
 
+    <a href="/visita"><h3>visita</h3></a>
+
     <a href="test"><h3>pantallas de prueba</h3></a>
 
 </body>
