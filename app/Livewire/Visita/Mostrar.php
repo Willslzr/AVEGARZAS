@@ -46,6 +46,8 @@ class Mostrar extends Component
         $this->totalPedienteBolivar = ($numElementos - 1) * $this->dolar * $this->costomensual;
 
         $this->check = $numElementos - 1;
+
+
     }
 
     public function update($valor)
@@ -67,19 +69,19 @@ class Mostrar extends Component
 
     public function calmeses($mespago){
         // Obtener el mes actual
-    $mesActual = Carbon::now()->format('m-Y');
+    $mesActual = Carbon::now();
 
     // Obtener el mes de pago
-    $mesPago = Carbon::parse($mespago)->format('m-Y');
+    $mesPago = Carbon::parse($mespago);
 
     // Obtener la diferencia entre los dos meses
-    $diferencia = (int) $mesPago - (int) $mesActual;
+    $diferencia = $mesPago->diffInMonths($mesActual);
 
     // Crear un arreglo vacío
     $meses = [];
 
     // Recorrer la diferencia de meses
-    for ($i = 0; $i <= $diferencia; $i++) {
+    for ($i = 1; $i <= $diferencia; $i++) {
         // Obtener el mes actual
         $mes = Carbon::parse(strtotime($mespago))->addMonths($i)->format('F-Y');
 

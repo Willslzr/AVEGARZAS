@@ -110,7 +110,7 @@
                 {{-- datos del usuario activo: nombre y foto de perfil --}}
                 <li class="nav-item d-flex align-items-center">
                 <a href="#" class="nav-link text-body font-weight-bold px-0">
-                    <img src="#" class="avatar avatar-sm bg-gradient-dark  ps-3 ">
+                    <img src="../assets/img/perfil.jpg" class="avatar avatar-sm bg-gradient-dark ">
                     <span class="d-sm-inline d-none">William Salazar</span>
                 </a>
                 </li>

@@ -13,10 +13,16 @@ class mensualidades extends Model
         'titular_id',
         'monto',
         'mes_pagado',
+        'numero_de_meses',
         'imagen',
         'numero_de_referencia',
         'estado',
         'id_admin_aprob'
 
     ];
+
+    public function titular()
+    {
+        return $this->belongsTo(Titulares::class, 'titular_id');
+    }
 }

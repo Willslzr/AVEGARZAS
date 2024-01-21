@@ -109,6 +109,7 @@ class TitularesController extends Controller
             'imagen' => null,
             'numero_de_referencia' => "100001",
             'estado' => 'aprobado',
+            'numero_de_meses' => "1",
             'id_admin_aprob' => Auth::id(),
         ]);
 

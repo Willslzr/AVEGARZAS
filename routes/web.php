@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CobrosController;
 use App\Http\Controllers\VisitaController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
@@ -22,11 +23,11 @@ use App\Http\Controllers\MensualidadesController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/visita', [VisitaController::class, 'main'])->name('visita.main');
+Route::get('/', [VisitaController::class, 'main'])->name('visita.main');
 Route::get('/visita/buscar', [VisitaController::class, 'buscar'])->name('visita.buscar');
 Route::get('/visita/{$manzana}/{$casa}', [VisitaController::class, 'mostrar'])->name('visita.mostrar');
 Route::post('/visita/store', [VisitaController::class, 'store'])->name('visita.store');
@@ -51,6 +52,8 @@ Route::post('/configuracion', [ConfiguracionController::class, 'store'])->name('
 
 Route::get('/Mensualidades' , [MensualidadesController::class,'index'])->middleware('auth')->name('mensualidades');
 
+Route::get('/Cobros' , [CobrosController::class,'index'])->middleware('auth')->name('cobros');
+Route::get('/Cobros/aprobar/{id}' , [CobrosController::class,'aprobar'])->middleware('auth')->name('cobros.aprobar');
 
 
 // Route::post('/login', [LoginController::class, 'login']);

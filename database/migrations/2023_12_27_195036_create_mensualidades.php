@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('titular_id');
             $table->date('mes_pagado');
+            $table->integer('numero_de_meses');
             $table->decimal('monto', 10,2);
             $table->string('imagen')->nullable();
             $table->string('estado');

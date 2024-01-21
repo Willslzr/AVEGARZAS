@@ -106,7 +106,7 @@
                             <div class="col-md-3 mb-md-0 mb-4">
                                     <x-field class="col-12 mx-1">
                                         <x-label for="Telefono" class="mx-0">Banco</x-label>
-                                        <x-select name="telefono_prefijo" class="input-with-border">
+                                        <x-select name="Banco" class="input-with-border">
                                             <option value="100%_Banco">100% Banco</option>
                                             <option value="Bancamiga">Bancamiga</option>
                                             <option value="BanCaribe">BanCaribe</option>
@@ -175,7 +175,7 @@
                             <span class="text-xs">$ {{$costomensual}} </span>
                             </div>
                             <div class="d-flex align-items-center text-sm">
-                            {{$dolar}}
+                            {{$dolar * $costomensual}}
                             @if ($key < $this->check)
                             <input type="checkbox" value="{{$key}}" class="form-check-input ms-4 input-with-border" wire:change="update({{$key}})" checked>
                             @else
@@ -189,6 +189,10 @@
                 </div>
             </div>
         </div>
+        <input type="text" name="monto" value="{{$totalPedienteBolivar}}" style="display:none;">
+        <input type="text" name="meses_pagados" value="{{$check}}" style="display:none;">
+        <input type="text" name="usuario_id" value="{{$usuario->id}}" style="display:none;">
+        <input type="text" name="mes_inicio" value="{{$mesespendientes[0]}}" style="display:none;">
     </x-form>
 </div>
 
