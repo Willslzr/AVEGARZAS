@@ -21,13 +21,20 @@
     <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    <style>
+        body {
+            background-image: url('../assets/img/fondo.jpg');
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body class="">
     <main class="main-content mt-0">
         <section>
             <div class="container my-5">
-                <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto border box-shadow">
+                <div class="bg-white col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto border box-shadow rounded">
+                <img src="../assets/img/avegarza_logo.png" class="rounded-circle mx-auto mt-3 item-align-center" alt="Imagen de perfil" style="width: 100px; height: 100px;">
                 <div class="card card-plain">
                     <div class="card-header">
                         @if (session('status'))
@@ -35,8 +42,8 @@
                             {{ session('status') }}
                         </div>
                         @endif
-                    <h4 class="font-weight-bolder">Pago de Mensualidad</h4>
-                    <p class="mb-0">Ingrese su direccion o Cedula</p>
+                    <h4 class="font-weight-bolder text-center">AVEGARZAS</h4>
+                    <p class="mb-0 text-center">Ingrese su numero de manzana y casa</p>
                     </div>
                     <div class="card-body">
                     <form action="{{route('visita.buscar')}}" method="GET">

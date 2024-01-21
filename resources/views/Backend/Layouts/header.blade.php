@@ -111,7 +111,7 @@
                 <li class="nav-item d-flex align-items-center">
                 <a href="#" class="nav-link text-body font-weight-bold px-0">
                     <img src="../assets/img/perfil.jpg" class="avatar avatar-sm bg-gradient-dark ">
-                    <span class="d-sm-inline d-none">William Salazar</span>
+                    <span class="d-sm-inline d-none">william salazar</span>
                 </a>
                 </li>
             </ul>

@@ -24,13 +24,19 @@
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+    <style>
+        body {
+            background-image: url('../assets/img/fondo.jpg');
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body class="">
     <main class="main-content mt-0">
         <section>
             <div class="container my-5">
-                <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto border box-shadow">
+                <div class="bg-white col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto border box-shadow rounded">
                 <div class="card card-plain">
                     <div class="card-header">
                     <h4 class="font-weight-bolder">Registro</h4>
