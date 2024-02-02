@@ -61,34 +61,64 @@ class RegisterController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        User::create([
+        $titular = Titulares::where('manzana', $request->manzana)
+        ->where('casa', $request->casa)
+        ->get()
+        ->toArray();
+
+        if ($request->manzana == $titular[0]['manzana'] && $request->casa == $titular[0]['casa'] && $request->cedula == $titular[0]['cedula']) {
+
+        // dd($titular);
+
+        $nuevoUsuario = User::create([
             'name' => strtoupper($request->nombres . ' ' . $request->apellidos),
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
 
-        $id = User::where('email','=', $request->input('email'))->first()->id;
-
         $fecha = Carbon::create(
-            $request->anno,
-            $request->mes,
-            $request->dia
-        );
+                $request->anno,
+                $request->mes,
+                $request->dia
+            );
 
-        Titulares::create([
-            'usuario_id' => $id,
+        $titular = Titulares::where('manzana', $request->manzana)
+        ->where('casa', $request->casa)
+        ->update([
+            'usuario_id' => $nuevoUsuario->id,
             'nombres' => strtoupper($request->nombres),
             'apellidos' => strtoupper($request->apellidos),
             'email' => $request->email,
-            'manzana' => $request->manzana,
-            'casa' => $request->casa,
             'telefono' => $request->telefono_prefijo.$request->telefono_numero,
-            'cedula' => $request->cedula,
-            'fecha_de_nacimiento' => $fecha,
-            'saldo_positivo' => "0",
+            'fecha_de_nacimiento' => $fecha
         ]);
 
-        return to_route('login')->with('status', 'Tu cuenta ha sido creada, espera que sea validada por uno de los administradores');
+        // $id = User::where('email','=', $request->input('email'))->first()->id;
+
+        // $fecha = Carbon::create(
+        //     $request->anno,
+        //     $request->mes,
+        //     $request->dia
+        // );
+
+        // Titulares::create([
+        //     'usuario_id' => $id,
+        //     'nombres' => strtoupper($request->nombres),
+        //     'apellidos' => strtoupper($request->apellidos),
+        //     'email' => $request->email,
+        //     'manzana' => $request->manzana,
+        //     'casa' => $request->casa,
+        //     'telefono' => $request->telefono_prefijo.$request->telefono_numero,
+        //     'cedula' => $request->cedula,
+        //     'fecha_de_nacimiento' => $fecha,
+        //     'saldo_positivo' => "0",
+        // ]);
+
+        return to_route('login')->with('status', 'Cuenta sincronizada');
+
+        }else{
+            return redirect()->back()->withErrors('Los datos introducidos no corresponden con el titular de la casa');
+        }
 
     }
 }

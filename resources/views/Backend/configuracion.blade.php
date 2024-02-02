@@ -58,12 +58,13 @@
                         </div>
                         @endif
 
-                        <div class="text-center">
+                        <div class="text-center my-5">
                             <button type="submit" class="btn btn-lg bg-gradient-info mt-4 mb-0">Guardar</button>
                         </div>
                     </div>
                 </div>
             </form>
+
         </x-slot>
     </x-card>
 

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Livewire\Cobros;
+namespace App\Livewire\CartasdePago;
 
+use App\Models\pagos;
 use Livewire\Component;
-use App\Models\Titulares;
 use Livewire\WithPagination;
-use App\Models\mensualidades;
-use Illuminate\Support\Carbon;
 
 class Indice extends Component
 {
+
     use WithPagination;
 
     public $search = '';
@@ -43,15 +42,11 @@ class Indice extends Component
     public function render()
     {
 
-        return view('livewire.cobros.indice', [
-            'mensualidades' => mensualidades::query()
-            ->selectRaw('*, COUNT(*) as num_meses') // Selecciona todas las columnas y cuenta el número de meses
-            ->where('estado', 'pendiente')
-            ->groupBy('id', 'numero_de_referencia') // Incluye todas las columnas en la cláusula GROUP BY
+        return view('livewire.cartasde-pago.indice', [
+            'pagos' => pagos::query()
             ->orderBy($this->sortField, $this->sortDirection)
             ->paginate($this->perPage),
         ]);
 
     }
 }
-

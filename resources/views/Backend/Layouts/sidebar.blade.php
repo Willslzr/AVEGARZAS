@@ -1,4 +1,4 @@
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header d-flex flex-column align-items-center">
         <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
         <div class="ms-4 mt-3 d-flex align-items-center">
@@ -17,6 +17,8 @@
                 <span class="nav-link-text ms-1">Pagina Principal</span>
             </a>
             </li>
+            @if (Auth::user()->admin)
+
             <li class="nav-item">
             <a class="nav-link text-white " href="{{route('mensualidades')}}">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -42,33 +44,35 @@
             </a>
             </li>
             <li class="nav-item">
-            <a class="nav-link text-white " href="#">
+            <a class="nav-link text-white " href="{{route('cartasdepago')}}">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">request_quote</i>
                 </div>
                 <span class="nav-link-text ms-1">Cartas de pago</span>
             </a>
             </li>
-            <li class="nav-item">
-            <a class="nav-link text-white " href="{{ route('configuracion') }}">
-                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="material-icons opacity-10">settings</i>
-                </div>
-                <span class="nav-link-text ms-1">Configuracion</span>
-            </a>
-            </li>
 
             <li class="nav-item mt-3">
-            <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Datos personales</h6>
+            <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Configuraciones</h6>
             </li>
+
             <li class="nav-item">
-            <a class="nav-link text-white " href="#">
+            <a class="nav-link text-white " href="{{ route('configurar') }}">
                 <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="material-icons opacity-10">person</i>
+                <i class="material-icons opacity-10">done_all</i>
                 </div>
-                <span class="nav-link-text ms-1">Perfil</span>
+                <span class="nav-link-text ms-1">Categorias</span>
             </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-white " href="{{ route('configuracion') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="material-icons opacity-10">attach_money</i>
+                    </div>
+                <span class="nav-link-text ms-1">Configurar costos</span>
+            </a>
+            </li>
+            @endif
             <li class="nav-item">
             <form action="{{route('logout')}}" method="POST">
             @csrf
@@ -80,19 +84,11 @@
             </a>
             </form>
             </li>
-            <li class="nav-item">
-            <a class="nav-link text-white " href="{{ route('test') }}">
-                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="material-icons opacity-10">assignment</i>
-                </div>
-                <span class="nav-link-text ms-1">modulo 3 de prueba</span>
-            </a>
-            </li>
+
         </ul>
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
         <div class="mx-3">
-            <a class="btn btn-outline-info mt-4 w-100" href="#" type="button">Configuracion</a>
             <a class="btn bg-gradient-info w-100" href="#" type="button">Contactanos</a>
         </div>
     </div>

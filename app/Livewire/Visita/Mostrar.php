@@ -28,7 +28,7 @@ class Mostrar extends Component
 
     public function mount(){
 
-        $configuracion = configuraciones::first();
+        $configuracion = configuraciones::orderBy('id', 'desc')->first();
 
         $this->dolar = $configuracion->precio_dolar;
 
@@ -65,8 +65,6 @@ class Mostrar extends Component
         return view('livewire.visita.mostrar');
     }
 
-
-
     public function calmeses($mespago){
         // Obtener el mes actual
     $mesActual = Carbon::now();
@@ -78,25 +76,33 @@ class Mostrar extends Component
     $diferencia = $mesPago->diffInMonths($mesActual);
 
     // Crear un arreglo vacío
-    $meses = [];
+    $mesesConFecha = [];
 
     // Recorrer la diferencia de meses
     for ($i = 1; $i <= $diferencia; $i++) {
         // Obtener el mes actual
         $mes = Carbon::parse(strtotime($mespago))->addMonths($i)->format('F-Y');
 
-        // Agregar el mes al arreglo
-        $meses[] = $mes;
+        // Obtener la fecha del primer día del mes
+        $fecha = Carbon::parse(strtotime($mespago))->addMonths($i)->startOfMonth()->format('d/m/Y');
+
+        // Agregar el mes y la fecha al arreglo
+        $mesesConFecha[] = [
+        'mes' => $mes,
+        'fecha' => $fecha,
+        ];
     }
 
     $mesesEnIngles = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     $mesesEnEspanol = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-    // Reemplazar los nombres de los meses en el arreglo
-    $meses = str_replace($mesesEnIngles, $mesesEnEspanol, $meses);
+    foreach ($mesesConFecha as &$mes) {
+    $mes['mes'] = str_replace($mesesEnIngles, $mesesEnEspanol, $mes['mes']);
+    }
 
+    // dd($mesesConFecha,);
     // Devolver el arreglo
-    return $meses;
+    return $mesesConFecha;
     }
 
 }

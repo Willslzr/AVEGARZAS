@@ -1,5 +1,10 @@
 <div>
-    <x-form action="{{route('visita.store')}}" method="POST">
+    @inject('carbon', 'Carbon\Carbon')
+    @php
+        $fechaActual = $carbon->now();
+        $diaActual = $fechaActual->day;
+    @endphp
+    <x-form action="{{route('visita.store')}}" enctype="multipart/form-data" method="POST">
         <div class="row">
             <div class="col-lg-8">
                 <div class="row">
@@ -124,23 +129,71 @@
                             <div class="col-md-3 mb-md-0 mb-4">
                                 <x-field class="col-12 mx-1">
                                         <x-label for="referencia">Referencia (4 digitos)</x-label>
-                                        <x-input type="text" name="referencia"/>
+                                        <x-input type="text" maxlength="4" name="referencia"/>
                                 </x-field>
                             </div>
                             <div class="col-md-3 mb-md-0 mb-4">
                                 <x-field class="col-12 mx-1 text-center">
                                     <x-label for="fech" class="mx-0">Fecha de Pago</x-label>
                                         <div class="d-flex">
-                                        <x-input type="number" name="dia" class="w-50 mx-1" placeholder="dia"/>
-                                        <x-input type="number" name="mes" class="w-50 mx-1" placeholder="mes"/>
-                                        <x-input type="number" name="ano" class="mx-1" placeholder="año"/>
+                                        <x-select name="dia" class="mx-1">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                        </x-select>
+                                        <x-select name="mes" class="mx-1">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        </x-select>
+                                        <x-select name="ano" class="mx-1">
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        </x-select>
                                         </div>
                                 </x-field>
                             </div>
                             <div class="col-md-3 mb-md-0 mb-4">
                                 <x-field class="col-12 mx-1 text-center">
-                                    <x-label for="fech" class="mx-0">Captura de pantalla</x-label>
-                                    <x-input type="file" name="soporte" class="mx-1" placeholder="Nuevo texto del placeholder"/>
+                                    <x-label for="soporte" class="mx-0">Captura de pantalla</x-label>
+                                    <input type="file" class="form-control form-control-user" name="soporte" id="soporte">
                                 </x-field>
                             </div>
                         </div>
@@ -160,9 +213,6 @@
                             <span class="me-2">
                                 <span class="badge bg-danger">Vencidas</span>
                             </span>
-                            <span>
-                                <span class="badge bg-warning">Vigentes</span>
-                            </span>
                         </div>
                     </div>
                     </div>
@@ -171,7 +221,7 @@
                         @foreach ($mesespendientes as $key => $mes)
                         <li class="nav-item list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                             <div class="d-flex flex-column">
-                            <h6 class="mb-1 text-dark font-weight-bold text-sm rounded {{ $loop->last ? 'bg-gradient-warning' : 'bg-gradient-danger' }}">{{$mes}}</h6>
+                            <h6 class="mb-1 text-dark font-weight-bold text-sm rounded {{ $loop->last ? 'bg-gradient-warning' : 'bg-gradient-danger' }}">{{$mes['mes']}}</h6>
                             <span class="text-xs">$ {{$costomensual}} </span>
                             </div>
                             <div class="d-flex align-items-center text-sm">
@@ -192,7 +242,7 @@
         <input type="text" name="monto" value="{{$totalPedienteBolivar}}" style="display:none;">
         <input type="text" name="meses_pagados" value="{{$check}}" style="display:none;">
         <input type="text" name="usuario_id" value="{{$usuario->id}}" style="display:none;">
-        <input type="text" name="mes_inicio" value="{{$mesespendientes[0]}}" style="display:none;">
+        <input type="text" name="mes_inicio" value="{{$mesespendientes[0]['fecha']}}" style="display:none;">
     </x-form>
 </div>
 

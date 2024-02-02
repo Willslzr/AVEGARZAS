@@ -10,6 +10,8 @@ use Nette\Utils\DateTime;
 use Illuminate\Http\Request;
 use App\Models\mensualidades;
 use Illuminate\Support\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,6 +25,25 @@ class TitularesController extends Controller
         return view("Backend.titulares.create");
     }
 
+    public function reporte(){
+
+        $usuarios = Titulares::orderBy('manzana', 'asc')
+        ->orderBy('casa', 'asc')
+        ->get();
+
+        $pdf = Pdf::loadView('Backend.titulares.reporte', compact('usuarios'));
+
+        return $pdf->stream('reporte_datos.pdf');
+    }
+
+    public function edit($id)
+    {
+        $usuario = Titulares::where('id', $id)
+        ->first();
+        // dd($usuario);
+        return view ("Backend.titulares.edit", compact('usuario', 'id'));
+    }
+
     public function store(Request $request){
 
         try{
@@ -34,12 +55,12 @@ class TitularesController extends Controller
             'dia' => ['integer','min:0','max:31', 'nullable'],
             'mes' => ['integer','min:0','max:12', 'nullable'],
             'ano' => ['integer', 'nullable', 'min:' . (new DateTime())->sub(new DateInterval('P100Y'))->format('Y'),'max:' . (new DateTime())->sub(new DateInterval('P18Y'))->format('Y')],
-            'cedula' => ['integer','min:0','max:50000000', 'nullable'],
+            'cedula' => ['integer','min:0','max:50000000', 'nullable', 'unique:titulares'],
             'telefono_numero' => ['integer','min:0', 'digits:7', 'nullable'],
             'manzana' => ['required', 'integer','min:1','max:22'],
             'casa' => ['required', 'integer','min:0','max:50'],
             'mescancel' => ['required', 'integer', 'min:1', 'max:12'],
-            'anocancel' => ['required', 'integer']
+            'anocancel' => ['required', 'integer', 'min:2017', 'max:2024']
         ]);
 
         $validator->setCustomMessages([
@@ -62,7 +83,7 @@ class TitularesController extends Controller
         ]);
 
         if ($validator->fails()) {
-            dd($validator);
+            // dd($validator);
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
@@ -74,7 +95,7 @@ class TitularesController extends Controller
             throw new Exception('Casa ocupada por: '. $direccionocupa->nombres . " " . $direccionocupa->apellidos);
         }
 
-        if($request->ano || $request->mes || $request->dia == null ){
+        if(!$request->ano || !$request->mes || !$request->dia ){
             $fecha = null;
         }else{
             $fecha = Carbon::create(
@@ -120,6 +141,80 @@ class TitularesController extends Controller
             dd($e, $request->casa, $request->manzana);
 
         }
+
+    }
+
+
+
+    public function update(request $request)
+    {
+
+        try{
+
+            $validator = Validator::make($request->all(), [
+                'nombres' => ['required', 'string', 'max:255'],
+                'apellidos' => ['required', 'string', 'max:255'],
+                'email' => ['string', 'max:255', 'email', Rule::unique('titulares')->ignore($request->id), 'nullable'],
+                'dia' => ['integer','min:0','max:31', 'nullable'],
+                'mes' => ['integer','min:0','max:12', 'nullable'],
+                'ano' => ['integer', 'nullable', 'min:' . (new DateTime())->sub(new DateInterval('P100Y'))->format('Y'),'max:' . (new DateTime())->sub(new DateInterval('P18Y'))->format('Y')],
+                'cedula' => ['integer','min:0','max:50000000', 'nullable', Rule::unique('titulares')->ignore($request->id)],
+                'telefono_numero' => ['integer','min:0', 'digits:7', 'nullable'],
+            ]);
+
+            $validator->setCustomMessages([
+                'nombres.required' => 'El campo "nombres" es obligatorio',
+                'nombres.max' => 'El nombre no debe tener mas de 255 letras',
+                'apellidos.required' => 'El campo "apellidos" es obligatorio',
+                'apellidos.max' => 'El apellidos no debe tener mas de 255 letras',
+                'email.email' => 'El campo "email" debe ser una dirección de correo electrónico válida.',
+                'email.unique' => 'Este correo ya esta siendo utilizado',
+                'dia' => 'Dia inválido',
+                'mes' => 'Mes debe ser un numero entre 1 y 12',
+                'ano' => 'Año inválido',
+                'cedula' => 'Numero de cedula invalido',
+                'telefono_numero' => 'Numero de telefono invalido',
+            ]);
+
+            if ($validator->fails()) {
+                // dd($validator);
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            if(!$request->ano || !$request->mes || !$request->dia ){
+                $fecha = null;
+            }else{
+                $fecha = Carbon::create(
+                    $request->ano,
+                    $request->mes,
+                    $request->dia
+                );
+            }
+
+            if ($request->telefono_numero == null){
+                $telefono = null;
+            } else {
+                $telefono = $request->telefono_prefijo.$request->telefono_numero;
+            }
+
+
+            Titulares::where('id', $request->input('id'))
+            ->update([
+                'nombres' => strtoupper($request->nombres),
+                'apellidos' => strtoupper($request->apellidos),
+                'email' => $request->email,
+                'telefono' => $telefono,
+                'cedula' => $request->cedula,
+                'fecha_de_nacimiento' => $fecha,
+            ]);
+
+            return to_route('titulares')->with('status', 'El titular ha sido actualizado');
+
+            }catch(Exception $e){
+
+                dd($e);
+
+            }
 
     }
 }

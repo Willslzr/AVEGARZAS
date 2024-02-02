@@ -14,6 +14,11 @@
         <div class="" wire:loading>
             <span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
         </div>
+        <div class="ms-auto">
+            <div class="">
+                <a href="{{route('mensualidades.general')}}" target="_blank" class="btn btn-sm bg-gradient-info mb-0">Reporte</a>
+            </div>
+        </div>
     </div>
 
 <x-table>
@@ -78,10 +83,10 @@
             <td>
                 <h6 class="mb-0 text-sm">{{ $usuario->casa }}</h6>
             </td>
-
-            @if($usuario->mensualidades()->latest()->first() && $fechaActual)
+            @if($usuario->mensualidades()->orderBy('id', 'desc')->first() && $fechaActual)
+            {{-- @dd($usuario->mensualidades()->orderBy('id', 'desc')->first()) --}}
             @php
-                $ultimaMensualidad = \Carbon\Carbon::parse($usuario->mensualidades()->latest()->first()->mes_pagado);
+                $ultimaMensualidad = \Carbon\Carbon::parse($usuario->mensualidades()->orderBy('id', 'desc')->first()->mes_pagado);
                 $diferenciaMeses = $ultimaMensualidad->diffInMonths($fechaActual);
             @endphp
             <td>
@@ -100,8 +105,8 @@
             @endif
 
             <td>
-                @if($usuario->mensualidades()->latest()->first() && $fechaActual)
-                <h6 class="mb-0 text-sm">{{ \Carbon\Carbon::parse($usuario->mensualidades()->latest()->first()->mes_pagado)->format('m/Y') }}</h6>
+                @if($usuario->mensualidades()->orderBy('id', 'desc')->first() && $fechaActual)
+                <h6 class="mb-0 text-sm">{{ \Carbon\Carbon::parse($usuario->mensualidades()->orderBy('id', 'desc')->first()->mes_pagado)->format('m/Y') }}</h6>
                 @else
                 <h6 class="mb-0 text-sm">Sin información</h6>
                 @endif
@@ -109,12 +114,10 @@
 
             <td>
                 <div class="btn-group">
-                    <a href="#" class="btn btn-sm btn-info" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Ver información">
-                        <i class="material-icons text-sm">visibility</i>
+                    <a href="{{ route('mensualidades.personal.reporte', ['id' => $usuario->id]) }}" target="_blank" class="btn btn-sm btn-info" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Editar">
+                        <i class="material-icons text-sm">description</i>
                     </a>
-                    <a href="#" class="btn btn-sm btn-primary" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Editar">
-                        <i class="material-icons text-sm">edit</i>
-                    </a>
+
                 </div>
             </td>
             </tr>

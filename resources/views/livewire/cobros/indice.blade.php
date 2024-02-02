@@ -51,7 +51,7 @@
                 @endif
             </span>
         </th>
-        <th wire:click="sortBy('apellidos')">Meses
+        <th wire:click="sortBy('apellidos')">Mes
             <span class="sort-arrow">
                 @if ($sortField === 'apellidos')
                     @if ($sortDirection === 'asc')
@@ -74,13 +74,15 @@
             </span>
         </th>
         <th>Ref°</th>
+        <th>Telefono</th>
         <th>Acciones</th>
         </tr>
     </x-slot>
     <x-slot name="tbody">
+        {{-- @dd($mensualidades) --}}
         @if ($mensualidades->isEmpty())
             <tr>
-                <td colspan="7" class="text-center py-4">No hay registros</td>
+                <td colspan="8" class="text-center py-4">No hay registros</td>
             </tr>
         @else
         @foreach ($mensualidades as $mes)
@@ -95,7 +97,7 @@
                 <h6 class="mb-0 text-sm">{{ $mes->titular()->first()->casa }}</h6>
             </td>
             <td>
-                <h6 class="mb-0 text-sm">{{ $mes->numero_de_meses }}</h6>
+                <h6 class="mb-0 text-sm">{{ \Carbon\Carbon::parse($mes->mes_pagado)->format('m/Y') }}</h6>
             </td>
             <td>
                 <h6 class="mb-0 text-sm">{{ $mes->monto }}</h6>
@@ -103,27 +105,27 @@
             <td>
                 <h6 class="mb-0 text-sm">{{ $mes->numero_de_referencia }}</h6>
             </td>
+            <td>
+                <h6 class="mb-0 text-sm">0{{ substr($mes->titular->telefono, 0, 3) . '-' . substr($mes->titular->telefono, 3) }}</h6>
+            </td>
 
             <td>
                 <div class="btn-group">
-                    @if($mes->soporte == null)
-                    <a href="#" class="btn btn-sm btn-info" title="Soporte" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Ver información">
+
+                    <a href="{{route('cobros.soporte', $mes->id)}}" target="_blank" class="btn btn-sm btn-info" title="Soporte" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Ver información">
                         <i class="material-icons text-sm">visibility</i>
                     </a>
-                    @else
-                    <a href="#" target="_blank" class="btn btn-sm btn-info" title="Soporte" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Ver información">
-                        <i class="material-icons text-sm">visibility</i>
+
+                    <a href="{{route('cobros.rechazar', $mes->id)}}" class="btn btn-sm btn-primary" title="Rechazar" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Rechazar">
+                        <i class="material-icons text-sm">close</i>
                     </a>
-                    @endif
-                    <a href="#" class="btn btn-sm btn-warning" title="Editar" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Editar">
-                        <i class="material-icons text-sm">edit</i>
-                    </a>
-                    <a href="{{route('cobros.aprobar', $mes->id)}}" class="btn btn-sm btn-primary" title="Aprobar" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Editar">
+                    <a href="{{route('cobros.aprobar', $mes->id)}}" class="btn btn-sm btn-success" title="Aprobar" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Aprobar">
                         <i class="material-icons text-sm">check</i>
                     </a>
                 </div>
             </td>
             </tr>
+
         @endforeach
         @endif
     </x-slot>

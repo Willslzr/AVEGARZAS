@@ -15,13 +15,16 @@ class DashboardController extends Controller
 
         $usuario = Auth::user();
 
-        $dinerocaja = cajas::first()
-        ->value('dinero_en_caja');
+        $caja = cajas::first();
+        $dinerocaja = $caja ? $caja->dinero_en_caja : 0;
+
+        // $dinerocaja = cajas::first()
+        // ->value('dinero_en_caja' ?? 0);
 
         $pDolar = configuraciones::first()
-        ->value('precio_dolar');
+        ->value('precio_dolar') ?? 0;
 
-        $caja = $dinerocaja / $pDolar;
+        $caja = round($dinerocaja / $pDolar, 2);
 
         $nUsuarios = User::count();
 
@@ -32,6 +35,6 @@ class DashboardController extends Controller
         //aqui ira mi logica para extraer la informacion que necesito de la base de datos
         //y dibujarla en el dashboard del usuario
 
-        return view('Backend.dashboard', compact('usuario', 'caja', 'nUsuarios', 'pCobros', 'pDolar'));
+        return view('Backend.dashboard', compact('usuario', 'caja', 'nUsuarios', 'pCobros', 'pDolar', 'dinerocaja'));
     }
 }

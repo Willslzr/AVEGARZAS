@@ -15,8 +15,9 @@
             <span class="spinner-border spinner-border-sm ms-2" role="status" aria-hidden="true"></span>
         </div>
         <div class="ms-auto">
-            <div class="">
-                <a href="{{route('titulares.create')}}" class="btn btn-sm bg-gradient-info mb-0">Nuevo</a>
+            <div class="d-flex">
+                <a href="{{route('titulares.create')}}" class="btn btn-sm bg-gradient-success mb-0 me-2">Nuevo</a>
+                <a href="{{route('titulares.reporte')}}" target="_blank" class="btn btn-sm bg-gradient-info mb-0">Reporte</a>
             </div>
         </div>
     </div>
@@ -98,10 +99,7 @@
             </td>
             <td>
                 <div class="btn-group">
-                    <a href="#" class="btn btn-sm btn-info" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Ver información">
-                        <i class="material-icons text-sm">visibility</i>
-                    </a>
-                    <a href="#" class="btn btn-sm btn-primary" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Editar">
+                    <a href="{{route('titulares.edit', $usuario->id)}}" class="btn btn-sm btn-primary" style="margin-bottom: 0" data-toggle="tooltip" data-original-title="Editar">
                         <i class="material-icons text-sm">edit</i>
                     </a>
                 </div>

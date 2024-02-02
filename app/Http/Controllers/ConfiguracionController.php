@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\configuraciones;
+use App\Models\categorias;
 use Illuminate\Http\Request;
+use App\Models\configuraciones;
 use Illuminate\Support\Facades\Validator;
 
 class ConfiguracionController extends Controller
@@ -41,5 +42,42 @@ class ConfiguracionController extends Controller
         ]);
 
         return to_route('configuracion')->with('status', 'se han actualizado los precios');
-}
+    }
+
+    public function configurar(){
+
+        $categorias = categorias::all();
+
+        return view ('Backend.categorias', compact('categorias'));
+    }
+
+    public function guardar(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'nombre' => ['required', 'unique:categorias'],
+            'descripcion' => ['required'],
+        ]);
+        $validator->setCustomMessages([
+            'nombre' => 'Nombre vacio o duplicado',
+            'descripcion' => 'Descripcion Vacia'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        categorias::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+        ]);
+
+        return to_route('configurar')->with('status', 'se registrado categoria');
+    }
+
+    public function eliminar($id){
+
+        categorias::where('id', $id)->delete();
+
+        return to_route('configurar')->with('status', 'se ha eliminado categoria');
+    }
+
 }

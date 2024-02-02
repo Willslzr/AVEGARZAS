@@ -58,6 +58,12 @@
                             </div>
                         </div>
 
+                        @if (session('error'))
+                            <div class="alert alert-danger mx-2 p-1 text-center text-white">
+                                <p>{{ session('error') }}</p>
+                            </div>
+                        @endif
+
                         <div class="text-center">
                         <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100  mt-4 mb-0">Buscar</button>
                         </div>
