@@ -67,9 +67,9 @@
                                     <x-field class="col-3 mx-1 text-center">
                                         <x-label for="fech" class="mx-0">Fecha de Nacimiento</x-label>
                                             <div class="d-flex">
-                                            <x-input type="number" name="dia" class="w-50 mx-1" placeholder="dia"/>
-                                            <x-input type="number" name="mes" class="w-50 mx-1" placeholder="mes"/>
-                                            <x-input type="number" name="ano" class="mx-1" placeholder="año"/>
+                                            <x-input type="number" name="dia" class="w-50 mx-1" min="0" max="31" placeholder="dia"/>
+                                            <x-input type="number" name="mes" class="w-50 mx-1" min="0" max="12" placeholder="mes"/>
+                                            <x-input type="number" name="ano" class="mx-1" min="1940" max="2024" placeholder="año"/>
                                             </div>
                                     </x-field>
                                 </div>
@@ -80,7 +80,7 @@
                                         <x-label for="MesCancelado" class="mx-0">Ultima mensualidad cancelada *</x-label>
                                             <div class="d-flex">
                                             <x-input type="number" name="mescancel" class="w-50 mx-1 text-center" placeholder="mes"/>
-                                            <x-input type="number" name="anocancel" class="mx-1 text-center" placeholder="año"/>
+                                            <x-input type="number" name="anocancel" class="mx-1 text-center" placeholder="año" min="2021" max="2024"/>
                                             </div>
                                     </x-field>
                                 </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\CobrosController;
 use App\Http\Controllers\VecinoController;
 use App\Http\Controllers\VisitaController;
+use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TitularesController;
@@ -26,7 +27,7 @@ use App\Http\Controllers\MensualidadesController;
 */
 
 Route::get('/welcome', function () {
-    return view('welcome');
+    return view('login');
 });
 
 
@@ -81,5 +82,7 @@ Route::post('/CartasDePago/store', [CartasdePagoController::class,'store'])->mid
 Route::post('/CartasDePago/guardar', [CartasdePagoController::class,'guardar'])->middleware(['auth', 'admin'])->name('cartasdepago.guardar');
 Route::get('/CartasDePago/{id}', [CartasdePagoController::class,'edit'])->middleware(['auth', 'admin'])->name('cartasdepago.edit');
 
+Route::get('/reporte', [ReporteController::class, 'main'])->name('reporte.main');
+Route::post('/reporteGenerado', [ReporteController::class, 'reporte'])->name('reporte.generar');
 
 // Route::post('/login', [LoginController::class, 'login']);
