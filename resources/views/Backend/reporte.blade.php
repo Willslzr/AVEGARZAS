@@ -21,6 +21,11 @@
             </tr>
         </thead>
         <tbody>
+            @if($registros == null)
+            <tr>
+                <td colspan="8" class="text-center py-4">No hay registros</td>
+            </tr>
+            @else
             @foreach ($registros as $item)
             <tr>
                 <td style="text-align: center; padding: 7px; border: 1px solid black;">{{ $item['nombre'] }}</td>
@@ -33,6 +38,7 @@
                 <td style="text-align: center; padding: 7px; border: 1px solid black;">{{ $item['fecha'] }}</td>
             </tr>
             @endforeach
+            @endif
         </tbody>
     </table>
 </body>
